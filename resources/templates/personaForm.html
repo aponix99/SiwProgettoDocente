@@ -1,0 +1,25 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+
+<head>
+    <meta charset="UTF-8" />
+        <link href="/css/my-style.css" rel="stylesheet">
+    <title>Form Persona</title>
+</head>
+<body>
+    <form th:action="@{/persona}" method="post" th:object="${persona}">
+        <div th:if="${#fields.hasGlobalErrors()}">
+             <p th:each="err : ${#fields.globalErrors()}" th:text="${err}">...</p> 
+            </div>
+          
+        <div>Nome<input type="text" th:field="*{nome}"> </div>
+        <span th:if="${#fields.hasErrors('nome')}" th:errors="*{nome}"></span>
+        <div>Cognome<input type="text" th:field="*{cognome}"></div>
+        <span th:if="${#fields.hasErrors('cognome')}" th:errors="*{cognome}"></span>
+        <div>Eta<input type="text" th:field="*{eta}"></div>
+        <span th:if="${#fields.hasErrors('eta')}" th:errors="*{eta}"></span>
+        <div><button type="submit">Conferma</button></div>
+        <span th:if="${#fields.hasErrors('eta')}" th:errors="*{eta}"></span>
+
+    </form>
+</body>

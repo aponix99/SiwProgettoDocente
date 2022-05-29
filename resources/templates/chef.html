@@ -1,0 +1,21 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+
+<head>
+    <meta charset="UTF-8" />
+        <link href="/css/my-style.css" rel="stylesheet">
+    <title>Dettagli chef</title>
+</head>
+<body>
+    <div>
+        <h4>Dettagli chef</h4>
+        <div>
+            <span th:text="${chef.nome}">Paolo</span>
+            <span th:text="${chef.cognome}">Rossi</span>
+            <span th:text="${chef.nazionalita}">Nazionalita</span>
+        </div>
+        <a href="buffetForm.html" th:href="@{'/buffetForm'}">Inserisci buffet</a>
+    </div>
+    <footer><a href="/default">Home</a></footer>
+</body>
+</html>

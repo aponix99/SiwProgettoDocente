@@ -9,25 +9,24 @@ import javax.persistence.GenerationType;
 import javax.persistence.Id;
 import javax.persistence.ManyToOne;
 import javax.persistence.OneToMany;
+import javax.validation.constraints.NotBlank;
 @Entity
 public class Piatto {
 	@Id
 	@GeneratedValue(strategy = GenerationType.AUTO)
 	private Long id;
-	@Column
-	String nome;
-	@Column
-	String descrizione;
+	
+	@NotBlank
+	private String nome;
+	
+	@NotBlank
+	private String descrizione;
 	@ManyToOne
 	Buffet buffet;
+	
 	@OneToMany (mappedBy="nome")
 	private List<Ingrediente> ingredienti;
-	public Piatto(String nome, String descrizione, Buffet buffet) {
-		super();
-		this.nome = nome;
-		this.descrizione = descrizione;
-		this.buffet = buffet;
-	}
+	
 	public String getNome() {
 		return nome;
 	}

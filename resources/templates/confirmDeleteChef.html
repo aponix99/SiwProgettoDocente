@@ -1,0 +1,21 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+
+<head>
+    <meta charset="UTF-8" />
+        <link href="/css/my-style.css" rel="stylesheet">
+    <title>Elimina chef</title>
+</head>
+<body>
+    <div>
+        <h4>Vuoi eliminare questo chef?</h4>
+        <div>
+            <span th:text="${chef.nome}">Paolo</span>
+            <span th:text="${chef.cognome}">Rossi</span>
+            <span th:text="${chef.nazionalita}">18</span>
+        </div>
+        <a href="chefs.html" th:href="@{'/deleteChef' + '/' + ${chef.id}}">Elimina</a>
+    </div>
+    <footer><a href="/">Home</a></footer>
+</body>
+</html>

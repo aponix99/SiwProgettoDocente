@@ -1,0 +1,19 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+  <head>
+    <title>Buffets</title>
+  </head>
+  <body>
+    <h4>Elenco buffets</h4>
+    <ul>
+		<li th:each="buffet : ${buffets}">
+      <td th:text="${buffet.nome}">nome</td>
+      <td th:text="${buffet.descrizione}">descrizione</td>
+      <td th:text="${chef}">chef id</td>
+      <a href="buffet.html" th:href="@{'/buffet' + '/' + ${buffet.id}}"
+      th:text="dettagli">Il mio buffet</a>
+		</li>
+    </ul>
+    <footer><a href="/default">Home</a></footer>
+  </body>
+</html>

@@ -1,0 +1,26 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+
+<head>
+    <meta charset="UTF-8" />
+        <link href="/css/my-style.css" rel="stylesheet">
+    <title>Form Chef</title>
+</head>
+<body>
+    <h4>Chef</h4>
+    <form th:action="@{/chef}" method="post" th:object="${chef}">
+        <div th:if="${#fields.hasGlobalErrors()}">
+             <p th:each="err : ${#fields.globalErrors()}" th:text="${err}">...</p> 
+            </div>
+          
+        <div>Nome<input type="text" th:field="*{nome}"> </div>
+        <span th:if="${#fields.hasErrors('nome')}" th:errors="*{nome}"></span>
+        <div>Cognome<input type="text" th:field="*{cognome}"></div>
+        <span th:if="${#fields.hasErrors('cognome')}" th:errors="*{cognome}"></span>
+        <div>Nazionalita<input type="text" th:field="*{nazionalita}"></div>
+        <span th:if="${#fields.hasErrors('nazionalita')}" th:errors="*{nazionalita}"></span>
+        <div><button type="submit">Conferma</button></div>
+        <span th:if="${#fields.hasErrors('nazionalita')}" th:errors="*{nazionalita}"></span>
+
+    </form>
+</body>
