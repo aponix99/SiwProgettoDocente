@@ -32,6 +32,31 @@ public class Credentials {
 	
 	@OneToOne(cascade = CascadeType.ALL)
 	private User user;
+	
+	@OneToOne(cascade = CascadeType.ALL)
+	private Chef chef;
+	
+
+
+	public Chef getChef() {
+		return chef;
+	}
+
+	public void setChef(Chef chef) {
+		this.chef = chef;
+	}
+
+	public static String getDefaultRole() {
+		return DEFAULT_ROLE;
+	}
+
+	public static String getAdminRole() {
+		return ADMIN_ROLE;
+	}
+
+	public static String getChefRole() {
+		return CHEF_ROLE;
+	}
 
 	public Long getId() {
 		return id;

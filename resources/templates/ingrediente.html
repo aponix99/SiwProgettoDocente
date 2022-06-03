@@ -1,0 +1,27 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+
+<head>
+    <meta charset="UTF-8" />
+        <link href="/css/my-style.css" rel="stylesheet">
+    <title>Dettagli ingrediente</title>
+</head>
+<body>
+    <div>
+        <h4>Dettagli ingrediente</h4>
+        <div>
+           Nome: <span th:text="${ingrediente.nome}">Nome Ingrediente</span>
+        </div>
+        <div>
+            Descrizione: <span th:text="${ingrediente.descrizione}">Questo e' un ingrediente</span>
+        </div>
+        <div>
+            Origine: <span th:text="${ingrediente.origine}">Questo e' un ingrediente</span>
+        </div>
+        <div>
+            Id: <span th:text="${ingrediente.id}">Campo id</span>
+        </div>
+    </div>
+    <footer><a href="/default">Home</a></footer>
+</body>
+</html>

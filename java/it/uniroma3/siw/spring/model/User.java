@@ -15,7 +15,16 @@ public class User {
 	private Long id;
 	private String nome;
 	private String cognome;
+	private String nazionalita;
 	
+	public String getNazionalita() {
+		return nazionalita;
+	}
+
+	public void setNazionalita(String nazionalita) {
+		this.nazionalita = nazionalita;
+	}
+
 	public Long getId() {
 		return id;
 	}

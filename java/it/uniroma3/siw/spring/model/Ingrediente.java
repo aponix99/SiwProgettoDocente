@@ -18,19 +18,22 @@ public class Ingrediente {
 	String origine;
 	@Column 
 	String descrizione;
+
 	@ManyToOne
 	Piatto piatto;
 	
-	public Ingrediente(String nome, String origine, String descrizione,Piatto piatto) {
-		super();
-		this.nome = nome;
-		this.origine = origine;
-		this.descrizione = descrizione;
-		this.piatto= piatto;
+	
+	public Piatto getPiatto() {
+		return piatto;
+	}
+	public void setPiatto(Piatto piatto) {
+		this.piatto = piatto;
 	}
 	public String getNome() {
 		return nome;
 	}
+	
+	
 	public void setNome(String nome) {
 		this.nome = nome;
 	}
@@ -46,5 +49,12 @@ public class Ingrediente {
 	public void setDescrizione(String descrizione) {
 		this.descrizione = descrizione;
 	}
+	public Long getId() {
+		return id;
+	}
+	public void setId(Long id) {
+		this.id = id;
+	}
+
 	
 }

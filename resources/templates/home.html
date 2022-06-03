@@ -1,7 +1,6 @@
 <!DOCTYPE html>
 <html xmlns:th="http://www.thymeleaf.org">
 <head>
-    <meta charset="UTF-8" />
         <link href="/css/my-style.css" rel="stylesheet">
     <title>Index</title>
 </head>
@@ -9,13 +8,17 @@
  <div>
         <h4>Operazioni</h4>
         <div>
+            Debug Log: My credentials id:<td th:text="${credentials.id}">nome</td>
             <div>   
                 <a href="persona.html" th:href="@{/persone}">Lista persone</a>
             </div>
             <div>
                 <a href="chef.html" th:href="@{/chefs}">Lista chefs</a>
             </div>
-
+            
+            <div>
+                <a href="chef.html" th:href="@{'/ilMioProfilo' + '/' + ${credentials.id}}">Il Mio Profilo</a>
+            </div>
             <div>
                 <a href="buffet.html" th:href="@{/buffets}">Lista buffets</a>
             </div>
@@ -26,6 +29,23 @@
             <div>
                 <a href="buffetForm.html" th:href="@{/buffetForm}">Inserisci buffet</a>
             </div>
+            <div>
+                <a href="piattoForm.html" th:href="@{/piattoForm}">Inserisci piatto</a>
+            </div>
+
+            <div>
+                <a href="piatti.html" th:href="@{/piatti}">Lista piatti</a>
+            </div>
+
+            <div>
+                <a href="ingredienteForm.html" th:href="@{/ingredienteForm}">Inserisci ingrediente</a>
+            </div>
+            
+            <div>
+                <a href="ingredienti.html" th:href="@{/ingredienti}">Lista ingredienti</a>
+            </div>
+
+
         </div>
 </div>
     <div>

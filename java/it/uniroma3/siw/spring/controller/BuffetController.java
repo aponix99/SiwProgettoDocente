@@ -17,6 +17,7 @@ import it.uniroma3.siw.spring.controller.validator.BuffetValidator;
 import it.uniroma3.siw.spring.model.Buffet;
 import it.uniroma3.siw.spring.model.Chef;
 import it.uniroma3.siw.spring.service.BuffetService;
+import it.uniroma3.siw.spring.service.ChefService;
 
 
 
@@ -24,6 +25,7 @@ import it.uniroma3.siw.spring.service.BuffetService;
 public class BuffetController {
 	@Autowired BuffetService buffetService;
 	@Autowired BuffetValidator buffetValidator;
+	@Autowired ChefService chefService;
 
 
 
@@ -40,9 +42,12 @@ public class BuffetController {
 
 	}
 
-	@GetMapping("/buffetForm")
-	public String getBuffet(Model model) {
+	@GetMapping("chef/{id}/buffetForm")
+	public String getBuffetForm(@PathVariable("id") Long id,Model model) {
+		Chef chef=chefService.findById(id);
 		model.addAttribute("buffet",new Buffet());
+		model.addAttribute("listChefs",chef);
+		System.out.println(id);
 		return "buffetForm.html";
 	}
 
@@ -54,13 +59,25 @@ public class BuffetController {
 		model.addAttribute("buffets", this.buffetService.findAll());
 		return "buffets.html";
 	}
+
 	
-	//prende chef con id passato come parametro
-	@GetMapping("/buffet/{id}")
+	//prende chef con id passato come parametro 
+	@GetMapping("buffet/{id}")
 	public String getBuffet(@PathVariable("id") Long id, Model model) {
 		model.addAttribute("buffet", this.buffetService.findById(id));
 		return "buffet.html";
 	}
+	
+	//richiede tutti i buffet dello chef selezionato
+	@GetMapping("chef/{id}/buffets")
+	public String getBuffetsByChef(@PathVariable("id") Long id,Model model) {
+		Chef chef=chefService.findById(id);
+//		model.addAttribute("listChefs",chef);
+		List<Buffet> buffets=buffetService.findByChef(chef);
+		model.addAttribute("buffets", buffets);
+		return "buffets.html";
+	}
+	
 
 
 }

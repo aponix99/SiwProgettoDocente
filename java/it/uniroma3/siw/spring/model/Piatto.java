@@ -45,5 +45,18 @@ public class Piatto {
 	public void setBuffet(Buffet buffet) {
 		this.buffet = buffet;
 	}
+	public Long getId() {
+		return id;
+	}
+	public void setId(Long id) {
+		this.id = id;
+	}
+	public List<Ingrediente> getIngredienti() {
+		return ingredienti;
+	}
+	public void setIngredienti(List<Ingrediente> ingredienti) {
+		this.ingredienti = ingredienti;
+	}
+
 	
 }

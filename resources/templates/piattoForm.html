@@ -3,11 +3,11 @@
 
 <head>
         <link href="/css/my-style.css" rel="stylesheet">
-    <title>Form Buffet</title>
+    <title>Form Piatto</title>
 </head>
 <body>
-    <h4>Buffet</h4>
-    <form th:action="@{/buffet}" method="post" th:object="${buffet}">
+    <h4>Piatto</h4>
+    <form th:action="@{/piatto}" method="post" th:object="${piatto}">
         <div th:if="${#fields.hasGlobalErrors()}">
              <p th:each="err : ${#fields.globalErrors()}" th:text="${err}">...</p> 
             </div>
@@ -15,12 +15,12 @@
         <div>Nome<input type="text" th:field="*{nome}"> </div>
         <span th:if="${#fields.hasErrors('nome')}" th:errors="*{nome}"></span>
         <div>Descrizione<input type="text" th:field="*{descrizione}"></div>
-     <!-- <div>Chef Id<input type="text" th:field="*{chef}" th:value="${listChefs.id}" th:text="${listChefs.id}" readonly></div> -->
-      <select th:field="*{chef} " required hidden>
-           <th:block th:each="cat: ${listChefs}">
-               <option hidden th:text="${cat.nome}" th:value="${cat.id}"></option>
-        </th:block> 
-    </select> 
+       <!-- <div>Buffet Id<input type="text" th:field="*{buffet}"></div> -->
+       <select th:field="*{buffet} " required hidden>
+        <th:block th:each="cat: ${buffet}">
+            <option hidden th:text="${cat.nome}" th:value="${cat.id}"></option>
+     </th:block> 
+ </select>
         <div><button type="submit">Conferma</button></div>
 
     </form>

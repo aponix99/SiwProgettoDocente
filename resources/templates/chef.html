@@ -2,20 +2,34 @@
 <html xmlns:th="http://www.thymeleaf.org">
 
 <head>
-    <meta charset="UTF-8" />
         <link href="/css/my-style.css" rel="stylesheet">
     <title>Dettagli chef</title>
 </head>
 <body>
     <div>
         <h4>Dettagli chef</h4>
-        <div>
-            <span th:text="${chef.nome}">Paolo</span>
-            <span th:text="${chef.cognome}">Rossi</span>
-            <span th:text="${chef.nazionalita}">Nazionalita</span>
-        </div>
-        <a href="buffetForm.html" th:href="@{'/buffetForm'}">Inserisci buffet</a>
     </div>
+    <div>
+    <table>
+            <tr>
+                <th>Nome</th>
+                <th>Cognome</th>
+                <th>Nazionalita</th>
+                <th>Id</th>
+            </tr> 
+            <tr>     
+               <th> <span th:text="${chef.nome}">Paolo</span> </th>
+               <th> <span th:text="${chef.cognome}">Rossi</span> </th>
+               <th> <span th:text="${chef.nazionalita}">Nazionalita</span> </th>
+               <th> <span th:text="${chef.id}">Id</span> </th>
+            </tr>
+           
+    </table>
+    </div>
+        <a th:href="@{'/chef' + '/' + ${chef.id} + '/' + 'buffetForm'}">Inserisci buffet</a>
+        <div>
+            <a href="buffet.html" th:href="@{'/chef' + '/' + ${chef.id} + '/' + 'buffets'}">Lista buffets</a>
+        </div>
     <footer><a href="/default">Home</a></footer>
 </body>
 </html>

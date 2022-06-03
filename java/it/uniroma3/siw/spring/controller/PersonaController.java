@@ -13,8 +13,6 @@ import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
-import org.springframework.web.bind.annotation.RequestParam;
-
 import it.uniroma3.siw.spring.controller.validator.PersonaValidator;
 import it.uniroma3.siw.spring.model.Persona;
 import it.uniroma3.siw.spring.service.PersonaService;

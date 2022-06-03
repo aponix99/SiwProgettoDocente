@@ -13,11 +13,12 @@ import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
-import org.springframework.web.bind.annotation.RequestParam;
 
 import it.uniroma3.siw.spring.controller.validator.ChefValidator;
 import it.uniroma3.siw.spring.model.Chef;
+import it.uniroma3.siw.spring.model.Credentials;
 import it.uniroma3.siw.spring.service.ChefService;
+import it.uniroma3.siw.spring.service.CredentialsService;
 
 
 
@@ -25,6 +26,7 @@ import it.uniroma3.siw.spring.service.ChefService;
 public class ChefController {
 	@Autowired ChefService chefService;
 	@Autowired ChefValidator chefValidator;
+	@Autowired CredentialsService credentialsService;
 
 
 
@@ -47,15 +49,13 @@ public class ChefController {
 		return "chef.html";
 	}
 
-
-
-
 	//richiede tutte le chefs
 	@GetMapping("/chefs")
 	public String getChefs(Model model) {
 		List<Chef> chefs=chefService.findAll();
 		model.addAttribute("chefs", this.chefService.findAll());
 		return "chefs.html";
+		
 	}
 	
 	@GetMapping("/admin/chefs")
@@ -89,5 +89,12 @@ public class ChefController {
 		return "chefs.html";
 	}
 
+	@GetMapping("/ilMioProfilo/{id}")
+	public String ilMioProfilo(@PathVariable ("id") Long id, Model model ) {
+		Credentials credentials=credentialsService.getCredentials(id);
+		Chef chef=credentials.getChef();
+		model.addAttribute("chef", chef);
+		return "chef.html";
+	}
 }
 

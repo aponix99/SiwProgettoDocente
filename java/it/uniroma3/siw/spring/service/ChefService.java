@@ -27,11 +27,11 @@ public class ChefService {
 
 
 	public List<Chef> findAll() {
-		List<Chef> persone=new ArrayList<Chef>();
+		List<Chef> chefs=new ArrayList<Chef>();
 		for(Chef p:chefService.findAll()) {
-			persone.add(p);
+			chefs.add(p);
 		}
-		return persone;
+		return chefs;
 	}
 
 	public boolean alreadyExists(Chef o) {

@@ -44,5 +44,12 @@ public class BuffetService {
 		 buffetService.deleteById(id);
 		
 	}
-
+	
+	public List<Buffet> findByChef(Chef chef) {
+		List<Buffet> buffets=new ArrayList<Buffet>();
+		for(Buffet b: buffetService.findByChef(chef)) {
+			buffets.add(b);
+		}
+		return buffets;
+	}
 }

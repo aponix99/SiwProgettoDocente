@@ -6,14 +6,18 @@ import org.springframework.security.core.userdetails.UserDetails;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.validation.BindingResult;
+import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 
+import it.uniroma3.siw.spring.controller.validator.ChefValidator;
 import it.uniroma3.siw.spring.controller.validator.CredentialsValidator;
 import it.uniroma3.siw.spring.controller.validator.UserValidator;
+import it.uniroma3.siw.spring.model.Chef;
 import it.uniroma3.siw.spring.model.Credentials;
 import it.uniroma3.siw.spring.model.User;
+import it.uniroma3.siw.spring.service.ChefService;
 import it.uniroma3.siw.spring.service.CredentialsService;
 
 @Controller
@@ -24,6 +28,11 @@ public class AuthenticationController {
 	
 	@Autowired
 	private UserValidator userValidator;
+	@Autowired
+	private ChefService chefService;
+	
+	@Autowired
+	private ChefValidator chefValidator;
 	
 	@Autowired
 	private CredentialsValidator credentialsValidator;
@@ -42,7 +51,7 @@ public class AuthenticationController {
 	
 	@RequestMapping(value = "/logout", method = RequestMethod.GET) 
 	public String logout(Model model) {
-		return "index";
+		return "index.html";
 	}
 	
     @RequestMapping(value = "/default", method = RequestMethod.GET)
@@ -53,14 +62,39 @@ public class AuthenticationController {
     	if (credentials.getRole().equals(Credentials.ADMIN_ROLE)) {
             return "admin/home";
         }
+    	model.addAttribute("credentials",credentialsService.getCredentials(credentials.getId()));
         return "home.html";
     }
 	
     @RequestMapping(value = { "/register" }, method = RequestMethod.POST)
-    public String registerUser(@ModelAttribute("user") User user,
+    public String registerUser(@ModelAttribute("user") User user,@ModelAttribute("chef") Chef chef,
                  BindingResult userBindingResult,
                  @ModelAttribute("credentials") Credentials credentials,
-                 BindingResult credentialsBindingResult,
+                 BindingResult credentialsBindingResult,BindingResult chefBindingResult,
+                 Model model) {
+
+        // validate user and credentials fields
+        this.userValidator.validate(user, userBindingResult);
+        this.credentialsValidator.validate(credentials, credentialsBindingResult);
+        this.chefValidator.validate(chef, chefBindingResult);
+
+        // if neither of them had invalid contents, store the User and the Credentials into the DB
+        if(!userBindingResult.hasErrors() && ! credentialsBindingResult.hasErrors()) {
+            // set the user and store the credentials;
+            // this also stores the User, thanks to Cascade.ALL policy
+            credentials.setUser(user);
+            credentials.setChef(chef);
+            credentialsService.saveCredentials(credentials);
+            return "registrationSuccessful";
+        }
+        return "registerUser";
+    }
+    
+    @RequestMapping(value = { "/registerAsChef" }, method = RequestMethod.POST)
+    public String registerUserAsChef(@ModelAttribute("user") User user,@ModelAttribute("chef") Chef chef,
+                 BindingResult userBindingResult,
+                 @ModelAttribute("credentials") Credentials credentials,
+                 BindingResult credentialsBindingResult, BindingResult chefBindingResult,
                  Model model) {
 
         // validate user and credentials fields
@@ -68,13 +102,24 @@ public class AuthenticationController {
         this.credentialsValidator.validate(credentials, credentialsBindingResult);
 
         // if neither of them had invalid contents, store the User and the Credentials into the DB
-        if(!userBindingResult.hasErrors() && ! credentialsBindingResult.hasErrors()) {
+        if(!userBindingResult.hasErrors() && ! credentialsBindingResult.hasErrors() && !chefBindingResult.hasErrors()) {
             // set the user and store the credentials;
             // this also stores the User, thanks to Cascade.ALL policy
             credentials.setUser(user);
+            credentials.setChef(chef);
             credentialsService.saveCredentials(credentials);
             return "registrationSuccessful";
         }
-        return "registerUser";
+        return "registerUserAsChef";
     }
+    
+	@GetMapping("/mainMenu")
+	public String getMainMenu(Model model) {
+		return "index.html";
+	}
+	
+	@GetMapping("/registerAsChefForm")
+	public String goToRegisterAsChefFormA(Model model) {
+		return "registerUserAsCHef.html";
+	}
 }

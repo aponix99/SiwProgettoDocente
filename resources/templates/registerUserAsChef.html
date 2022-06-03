@@ -29,13 +29,12 @@
                        th:field="${user.cognome}"/>
            <span th:if="${#fields.hasErrors('user.cognome')}"
                 th:errors="${user.cognome}" th:style="'color:red'"></span> 
-
                 <input type="text" placeholder="Nazionalita" required
                 th:field="${user.nazionalita}"/>
-                 <span th:if="${#fields.hasErrors('user.nazionalita')}"
+    <span th:if="${#fields.hasErrors('user.nazionalita')}"
          th:errors="${user.nazionalita}" th:style="'color:red'"></span> 
                 <input type="submit" name="" value="Registrati"/>
-                <p style="color: white;">Vuoi registrarti come chef?<a th:href="@{/registerAsChef}">Clicca qui</a>  </p>
+
 	</form>
     <footer th:replace="fragments/base.html :: fondo(home='/default')"></footer>
 </body>
