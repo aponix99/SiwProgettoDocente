@@ -1,6 +1,7 @@
 <!DOCTYPE html>
 <html xmlns:th="http://www.thymeleaf.org">
   <head>
+    <link href="/css/style-buffets.css" rel="stylesheet">
     <title>Buffets</title>
   </head>
   <body>
@@ -12,6 +13,7 @@
       <td th:text="${chef}">chef id</td>
       <a href="buffet.html" th:href="@{'/buffet' + '/' + ${buffet.id}}"
       th:text="dettagli">Il mio buffet</a>
+      <td><a th:href="@{'/toDeleteBuffet' + '/' + ${buffet.id}}" th:text="Elimina"></a> </td>
 		</li>
     </ul>
     <footer><a href="/default">Home</a></footer>

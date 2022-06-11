@@ -34,6 +34,7 @@ public class BuffetService {
 		}
 		return buffets;
 	}
+	
 
 	public boolean alreadyExists(Buffet o) {
 		// TODO Auto-generated .method stub
@@ -41,8 +42,7 @@ public class BuffetService {
 	}
 
 	public void deleteById(Long id) {
-		 buffetService.deleteById(id);
-		
+		 buffetService.deleteById(id);	
 	}
 	
 	public List<Buffet> findByChef(Chef chef) {

@@ -10,26 +10,28 @@
         <h4>Dettagli chef</h4>
     </div>
     <div>
-    <table>
+    <table id="chef">
             <tr>
                 <th>Nome</th>
                 <th>Cognome</th>
                 <th>Nazionalita</th>
-                <th>Id</th>
+               <!--<th>Id</th> -->
             </tr> 
             <tr>     
-               <th> <span th:text="${chef.nome}">Paolo</span> </th>
-               <th> <span th:text="${chef.cognome}">Rossi</span> </th>
-               <th> <span th:text="${chef.nazionalita}">Nazionalita</span> </th>
-               <th> <span th:text="${chef.id}">Id</span> </th>
+               <td> <span th:text="${chef.nome}">Paolo</span> </td>
+               <td> <span th:text="${chef.cognome}">Rossi</span> </td>
+               <td> <span th:text="${chef.nazionalita}">Nazionalita</span> </td>
+               <!-- <th> <span th:text="${chef.id}">Id</span> </th> -->
             </tr>
            
     </table>
     </div>
+    <div class="operazioni">
         <a th:href="@{'/chef' + '/' + ${chef.id} + '/' + 'buffetForm'}">Inserisci buffet</a>
         <div>
             <a href="buffet.html" th:href="@{'/chef' + '/' + ${chef.id} + '/' + 'buffets'}">Lista buffets</a>
         </div>
     <footer><a href="/default">Home</a></footer>
+    </div>
 </body>
 </html>

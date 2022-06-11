@@ -2,29 +2,35 @@
 <html xmlns:th="http://www.thymeleaf.org">
 
 <head>
-        <link href="/css/my-style.css" rel="stylesheet">
+        <link href="/css/style-buffet.css" rel="stylesheet">
     <title>Dettagli buffet</title>
 </head>
 <body>
     <div>
         <h4>Dettagli buffet</h4>
+        <div class="dati">
         <div>
            Nome: <span th:text="${buffet.nome}">Nome Buffet</span>
         </div>
+        <br>
+
         <div>
             Descrizione: <span th:text="${buffet.descrizione}">Questo e' un buffet</span>
         </div>
+        <br>
         <div>
             Buffet Id: <span th:text="${buffet.id}">Campo id</span>
         </div>
+    </div>
         <div>
+        <br>
             <a href="piattoForm.html" th:href="@{'/buffet' + '/' + ${buffet.id} + '/' + 'piattoForm'}">Inserisci piatto</a>
         </div>
 
         <div>
             <a href="piatti.html" th:href="@{'/buffet' + '/' + ${buffet.id} + '/' + 'piatti'}">Lista piatti</a>
         </div>
-    </div>
+        </div>
     <footer><a href="/default">Home</a></footer>
 </body>
 </html>

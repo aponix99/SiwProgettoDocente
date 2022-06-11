@@ -1,0 +1,19 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+
+<head>
+        <link href="/css/my-style.css" rel="stylesheet">
+    <title>Elimina chef</title>
+</head>
+<body>
+    <div>
+        <h4>Vuoi eliminare questo buffet?</h4>
+        <div>
+            <span th:text="${buffet.nome}">Paolo</span>
+            <span th:text="${buffet.descrizione}">Rossi</span>
+        </div>
+        <a href="chefs.html" th:href="@{'/deleteBuffet' + '/' + ${buffet.id}}">Elimina</a>
+    </div>
+    <footer><a href="/">Home</a></footer>
+</body>
+</html>

@@ -1,19 +1,27 @@
 <!DOCTYPE html>
 <html xmlns:th="http://www.thymeleaf.org">
   <head>
+    <link href="/css/style-piatti.css" rel="stylesheet">
     <title>Piatti</title>
   </head>
   <body>
     <h4>Elenco piatti del buffet</h4>
-    <ul>
-		<li th:each="piatto : ${piatti}">
-      <td th:text="${piatto.nome}">nome</td>
-      <td th:text="${piatto.descrizione}">descrizione</td>
-      <td th:text="${buffet}">chef id</td>
-      <a href="piatto.html" th:href="@{'/piatto' + '/' + ${piatto.id}}"
-      th:text="dettagli">Il mio piatto</a>
-		</li>
-    </ul>
+    <table id="piatti">
+        <tr>
+            <th>Nome</th>
+            <th>Descrizione</th>
+            <th></th>
+        </tr>
+        <div class="iterate">
+		<tr th:each="piatto : ${piatti}">
+      <td> <span th:text="${piatto.nome}">nome </span> </td>
+      <td> <span th:text="${piatto.descrizione}">descrizione </span></td>
+      <!--<td> <span th:text="${buffet}">chef id </span></td> -->
+      <td><a href="piatto.html" th:href="@{'/piatto' + '/' + ${piatto.id}}"
+      th:text="dettagli">Il mio piatto</a> </td>
+    </tr>
+  </table>
+</div>
     <footer><a href="/default">Home</a></footer>
   </body>
 </html>

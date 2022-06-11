@@ -22,7 +22,7 @@ public class CredentialsService {
 
 	@Autowired
 	protected CredentialsRepository credentialsRepository;
-	
+
 	@Transactional
 	public Credentials getCredentials(Long id) {
 		Optional<Credentials> result = this.credentialsRepository.findById(id);
@@ -35,6 +35,12 @@ public class CredentialsService {
 		return result.orElse(null);
 	}
 		
+
+	@Transactional
+	public Credentials getCredentials(Chef chef) {
+		Optional<Credentials> result = this.credentialsRepository.findByChef(chef);
+		return result.orElse(null);
+	}
     @Transactional
     public Credentials saveCredentials(Credentials credentials) {
         credentials.setRole(Credentials.DEFAULT_ROLE);
@@ -42,7 +48,9 @@ public class CredentialsService {
         return this.credentialsRepository.save(credentials);
     }
 
-    
-
+	public void deleteById(Long id) {
+		 credentialsRepository.deleteById(id);
+		
+	}
 
 }

@@ -1,21 +1,30 @@
 <!DOCTYPE html>
 <html xmlns:th="http://www.thymeleaf.org">
   <head>
+    <link href="/css/style-admin-chefs.css" rel="stylesheet">
     <title>Chefs</title>
   </head>
   <body>
     <h4>Elenco chef</h4>
-    <ul>
-		<li th:each="chef : ${chefs}">
-      <td th:text="${chef.nome}">nome</td>
-      <td th:text="${chef.cognome}">cognome</td>
-      <a href="persona.html" th:href="@{'/chef' + '/' + ${chef.id}}"
-      th:text="dettagli">Paolo Rossi</a>
-      <a th:href="@{'/toBuffetChef' + '/' + ${chef.id}}" th:text="Visualizza buffet"></a> 
-     <a th:href="@{'/toDeleteChef' + '/' + ${chef.id}}" th:text="Elimina"></a> 
-     <a th:href="@{'/toUpdateChef' + '/' + ${chef.id}}" th:text="update"></a> 
-		</li>
-    </ul>
+    <table id="chef">
+      <tr>
+        <th>Nome</th>
+        <th>Cognome</th>
+        <th>Nazionalita</th>
+        <th></th>
+        <th></th>
+      </tr>
+      <div class="iterate">
+		<tr th:each="chef : ${chefs}">
+      <td><span th:text="${chef.nome}">nome</span></td>
+      <td><span th:text="${chef.cognome}">cognome</td></span></td>
+      <td><a href="chef.html" th:href="@{'/chef' + '/' + ${chef.id}}"
+      th:text="dettagli">Paolo Rossi</a> </td>
+     <td><a th:href="@{'/toDeleteChef' + '/' + ${chef.id}}" th:text="Elimina"></a> </td>
+     <td><a th:href="@{'/toUpdateChef' + '/' + ${chef.id}}" th:text="update"></a> </td>
+    </tr>
+  </table>
+</div>
     <footer><a href="/default">Home</a></footer>
   </body>
 </html>

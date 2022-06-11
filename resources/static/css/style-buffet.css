@@ -1,0 +1,27 @@
+body{
+    margin: 0;
+    padding: 0;
+    font-family: sans-serif;
+    background: #34495e;
+  }
+
+  title{
+    color: white;
+  }
+
+
+  h4{
+    color: white;
+  }
+
+  ul{
+    border: 2px solid white;
+  }
+  li{
+    color:white;
+  }
+  
+  .dati{
+    color: white;
+    border: 1px solid white;
+  }

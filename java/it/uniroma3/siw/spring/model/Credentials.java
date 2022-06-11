@@ -1,6 +1,7 @@
 package it.uniroma3.siw.spring.model;
 
 import javax.persistence.Entity;
+import javax.persistence.FetchType;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
@@ -33,8 +34,10 @@ public class Credentials {
 	@OneToOne(cascade = CascadeType.ALL)
 	private User user;
 	
-	@OneToOne(cascade = CascadeType.ALL)
+	@OneToOne(fetch=FetchType.LAZY, cascade = CascadeType.ALL, orphanRemoval = true)
 	private Chef chef;
+	
+	
 	
 
 

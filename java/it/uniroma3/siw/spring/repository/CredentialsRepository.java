@@ -12,6 +12,6 @@ import it.uniroma3.siw.spring.model.Credentials;
 public interface CredentialsRepository extends CrudRepository<Credentials, Long> {
 	
 	public Optional<Credentials> findByUsername(String username);
-	public List<Credentials> findByChef(Chef chef);
+	public Optional<Credentials> findByChef(Chef chef);
 
 }

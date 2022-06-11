@@ -16,9 +16,12 @@ import org.springframework.web.bind.annotation.PostMapping;
 import it.uniroma3.siw.spring.controller.validator.BuffetValidator;
 import it.uniroma3.siw.spring.model.Buffet;
 import it.uniroma3.siw.spring.model.Chef;
+import it.uniroma3.siw.spring.model.Ingrediente;
+import it.uniroma3.siw.spring.model.Piatto;
 import it.uniroma3.siw.spring.service.BuffetService;
 import it.uniroma3.siw.spring.service.ChefService;
-
+import it.uniroma3.siw.spring.service.PiattoService;
+import it.uniroma3.siw.spring.service.IngredienteService;
 
 
 @Controller
@@ -26,6 +29,8 @@ public class BuffetController {
 	@Autowired BuffetService buffetService;
 	@Autowired BuffetValidator buffetValidator;
 	@Autowired ChefService chefService;
+	@Autowired PiattoService piattoService;
+	@Autowired IngredienteService ingredienteService;
 
 
 
@@ -51,7 +56,7 @@ public class BuffetController {
 		return "buffetForm.html";
 	}
 
-	
+
 	//richiede tutte le chefs
 	@GetMapping("/buffets")
 	public String getBuffets(Model model) {
@@ -60,24 +65,58 @@ public class BuffetController {
 		return "buffets.html";
 	}
 
-	
+
 	//prende chef con id passato come parametro 
 	@GetMapping("buffet/{id}")
 	public String getBuffet(@PathVariable("id") Long id, Model model) {
 		model.addAttribute("buffet", this.buffetService.findById(id));
 		return "buffet.html";
 	}
-	
+
 	//richiede tutti i buffet dello chef selezionato
 	@GetMapping("chef/{id}/buffets")
 	public String getBuffetsByChef(@PathVariable("id") Long id,Model model) {
 		Chef chef=chefService.findById(id);
-//		model.addAttribute("listChefs",chef);
+		//		model.addAttribute("listChefs",chef);
 		List<Buffet> buffets=buffetService.findByChef(chef);
 		model.addAttribute("buffets", buffets);
 		return "buffets.html";
 	}
-	
+
+	/*Funzione che rimanda a una pagina html di conferma per rimuovere una chef*/
+	@GetMapping("/toDeleteBuffet/{id}")
+	public String toDeleteBuffet(@PathVariable ("id") Long id,Model model) {
+		model.addAttribute("buffet",this.buffetService.findById(id));
+		return "confirmDeleteBuffet.html";
+	}
+
+	@Transactional
+	@GetMapping("deleteBuffet/{id}")
+	public String deleteBuffet(@PathVariable ("id") Long id,Model model) {
+		//		if(action.equals("Elimina")) {
+		//			this.chefService.deleteById(id);
+		//		}
+		Buffet buffet=buffetService.findById(id);
+		List <Piatto> piatti=piattoService.findByBuffet(buffet);
+		if(piatti!=null) {
+			for(Piatto p:piatti) {
+				List<Ingrediente> ingredienti=ingredienteService.findByPiatto(p);
+				if(ingredienti!=null){
+					for(Ingrediente i:ingredienti) {
+						Long idIngredienteCorrente=i.getId();
+						ingredienteService.deleteById(idIngredienteCorrente);
+					}
+				}
+				Long idPiattoCorrente=p.getId();
+				piattoService.deleteById(idPiattoCorrente);
+			}
+		}
+
+		buffetService.deleteById(id);
+		Chef chef=buffet.getChef();
+		model.addAttribute("buffets",buffetService.findByChef(chef));
+		return "buffets.html";
+	}
 
 
 }

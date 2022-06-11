@@ -2,7 +2,7 @@
 <html xmlns:th="http://www.thymeleaf.org">
 
 <head>
-        <link href="/css/my-style.css" rel="stylesheet">
+        <link href="/css/style-buffetForm.css" rel="stylesheet">
     <title>Form Ingrediente</title>
 </head>
 <body>
@@ -12,15 +12,19 @@
              <p th:each="err : ${#fields.globalErrors()}" th:text="${err}">...</p> 
             </div>
           
-        <div>Nome<input type="text" th:field="*{nome}"> </div>
+        <div class="border"> 
+        <div>Nome ingrediente <br> <input type="text" th:field="*{nome}"> </div>
         <span th:if="${#fields.hasErrors('nome')}" th:errors="*{nome}"></span>
-        <div>Descrizione<input type="text" th:field="*{descrizione}"></div>
-        <div>Origine<input type="text" th:field="*{origine}"></div>
+        <div>Descrizione <br><input class="descrizione" type="text" th:field="*{descrizione}"></div>
+        <div>Origine <br><input type="text" th:field="*{origine}"></div>
         <select th:field="*{piatto} " required hidden>
             <th:block th:each="cat: ${piatto}">
                 <option hidden th:text="${cat.nome}" th:value="${cat.id}"></option>
          </th:block> 
          </select>
+         <br>
+        </div>  
+        <br>
         <div><button type="submit">Conferma</button></div>
 
     </form>

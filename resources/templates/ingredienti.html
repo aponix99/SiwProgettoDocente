@@ -1,19 +1,29 @@
 <!DOCTYPE html>
 <html xmlns:th="http://www.thymeleaf.org">
   <head>
+    <link href="/css/style-ingredienti.css" rel="stylesheet">
     <title>Lista ingredienti</title>
   </head>
   <body>
     <h4>Elenco ingredienti</h4>
-    <ul>
-		<li th:each="ingrediente : ${ingredienti}">
-      <td th:text="${ingrediente.nome}">nome</td>
-      <td th:text="${ingrediente.descrizione}">descrizione</td>
-      <td th:text="${ingrediente.origine}">origine</td>
-      <a href="buffet.html" th:href="@{'/ingrediente' + '/' + ${ingrediente.id}}"
-      th:text="dettagli">Il mio ingrediente</a>
-		</li>
-    </ul>
+  <table id="ingredienti">
+    <tr>
+      <th>Nome</th>
+      <th>Descrizione</th>
+      <th>Origine</th>
+      <th></th>
+    </tr>
+    <div class="iterate">
+		<tr th:each="ingrediente : ${ingredienti}">
+      <td><span th:text="${ingrediente.nome}">nome </span></td>
+      <td><span th:text="${ingrediente.descrizione}">descrizione </span></td>
+      <td><span th:text="${ingrediente.origine}">origine </span></td>
+      <td><a href="buffet.html" th:href="@{'/ingrediente' + '/' + ${ingrediente.id}}"
+      th:text="dettagli">Il mio ingrediente</a> </td>
+    </tr>
+    <br>
+  </table>
+</div>
     <footer><a href="/default">Home</a></footer>
   </body>
 </html>

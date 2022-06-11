@@ -45,7 +45,7 @@ public class IngredienteController {
 	//prende Ingrediente con id passato come parametro
 	@GetMapping("/ingrediente/{id}")
 	public String getIngrediente(@PathVariable("id") Long id, Model model) {
-		model.addAttribute("Ingrediente", this.ingredientiService.findById(id));
+		model.addAttribute("ingrediente", this.ingredientiService.findById(id));
 		return "ingrediente.html";
 	}
 
