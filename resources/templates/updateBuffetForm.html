@@ -1,0 +1,32 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+
+<head>
+        <link href="/css/style-buffetForm.css" rel="stylesheet">
+    <title>Form Buffet</title>
+</head>
+<body>
+    <h4>Buffet Update Form</h4>
+ <div class="form">
+    <form th:action="@{/updateBuffet}" method="post" th:object="${buffet}">
+        <div th:if="${#fields.hasGlobalErrors()}">
+             <p th:each="err : ${#fields.globalErrors()}" th:text="${err}">Buffet Form</p> 
+            </div>
+        <div class="border">
+        <div>Nome del buffet <br><input type="text" th:field="*{nome}" th:value="${buffet.nome}"> </div>
+        <span th:if="${#fields.hasErrors('nome')}" th:errors="*{nome}"></span>
+        <div>Descrizione del buffet<br><input class="descrizione" type="text" th:field="*{descrizione}" th:value="${buffet.descrizione}" maxlength="1000"> </div>
+     <!-- <div>Chef Id<input type="text" th:field="*{chef}" th:value="${listChefs.id}" th:text="${listChefs.id}" readonly></div> -->
+      <select th:field="*{chef} " required hidden>
+           <th:block th:each="chef: ${listChefs}">
+               <option hidden th:text="${chef.nome}" th:value="${chef.id}"></option>
+        </th:block> 
+       </select> 
+       <br>
+    </div>
+       <br>
+        <div><button type="submit">Conferma</button></div>
+
+    </form>
+ </div>
+</body>

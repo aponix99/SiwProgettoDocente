@@ -13,6 +13,9 @@ import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
+import org.springframework.web.bind.annotation.PutMapping;
+import org.springframework.web.bind.annotation.RequestBody;
+
 import it.uniroma3.siw.spring.controller.validator.BuffetValidator;
 import it.uniroma3.siw.spring.model.Buffet;
 import it.uniroma3.siw.spring.model.Chef;
@@ -43,8 +46,13 @@ public class BuffetController {
 			model.addAttribute("buffet",buffetService.findById(buffet.getId()));
 			return "buffet.html";
 		}
+		//qui ho errori
+		Long id=buffet.getChef().getId();
+		Chef chef=chefService.findById(id);
+		model.addAttribute("buffet",buffet);
+		model.addAttribute("listChefs",chef);
 		return "buffetForm.html";
-
+		
 	}
 
 	@GetMapping("chef/{id}/buffetForm")
@@ -52,9 +60,18 @@ public class BuffetController {
 		Chef chef=chefService.findById(id);
 		model.addAttribute("buffet",new Buffet());
 		model.addAttribute("listChefs",chef);
-		System.out.println(id);
 		return "buffetForm.html";
 	}
+	
+	@GetMapping("/buffetForm")
+	public String getBuffetFormStandard(@PathVariable("id") Long id,Model model) {
+		Chef chef=chefService.findById(id);
+		model.addAttribute("buffet",new Buffet());
+		model.addAttribute("listChefs",chef);
+		return "buffetForm.html";
+	}
+	
+
 
 
 	//richiede tutte le chefs

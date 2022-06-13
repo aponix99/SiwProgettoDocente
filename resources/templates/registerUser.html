@@ -15,28 +15,24 @@
     
           <span th:if="${#fields.hasErrors('credentials.username')}"
                 th:errors="${credentials.username}" th:style="'color:red'"> </span>
-            <input type="password" placeholder="Password" required
-                       th:field="${credentials.password}"/>
+                
+            <input type="password" placeholder="Password" required th:field="${credentials.password}"/>
          <span th:if="${#fields.hasErrors('credentials.password')}"
                 th:errors="${credentials.password}" th:style="'color:red'"></span>
        
-            <input type="text" placeholder="Nome" required
-                       th:field="${user.nome}"/>
-            <span th:if="${#fields.hasErrors('user.nome')}"
-                th:errors="${user.nome}" th:style="'color:red'"></span>
-      
-            <input type="text" placeholder="Cognome" required
-                       th:field="${user.cognome}"/>
-           <span th:if="${#fields.hasErrors('user.cognome')}"
-                th:errors="${user.cognome}" th:style="'color:red'"></span> 
-
-                <input type="text" placeholder="Nazionalita" required
-                th:field="${user.nazionalita}"/>
-                 <span th:if="${#fields.hasErrors('user.nazionalita')}"
-         th:errors="${user.nazionalita}" th:style="'color:red'"></span> 
-                <input type="submit" name="" value="Registrati"/>
-                <p style="color: white;">Vuoi registrarti come chef?<a th:href="@{/registerAsChef}">Clicca qui</a>  </p>
+            <input type="text" placeholder="Nome" required th:field="${user.nome}"/>
+             <span th:if="${#fields.hasErrors('user.nome')}"
+              th:errors="${user.nome}" th:style="'color:red'"></span>
+               <input type="text" placeholder="Cognome" required th:field="${user.cognome}"/>
+               <span th:if="${#fields.hasErrors('user.cognome')}"
+               th:errors="${user.cognome}" th:style="'color:red'"></span> 
+               
+               <input type="text" placeholder="Nazionalita" required th:field="${user.nazionalita}"/>
+               <span th:if="${#fields.hasErrors('user.nazionalita')}" th:errors="${user.nazionalita}" th:style="'color:red'"></span>
+               
+               <input type="submit" name="" value="Registrati"/>
+               
+               <p style="color: white;">Hai gia un account?Effettua il  <a th:href="@{/login}">login</a>  </p>
 	</form>
-    <footer th:replace="fragments/base.html :: fondo(home='/default')"></footer>
 </body>
 </html>

@@ -22,6 +22,7 @@ public class Piatto {
 	
 	@NotBlank
 	private String descrizione;
+	
 	@ManyToOne(fetch=FetchType.LAZY)
 	Buffet buffet;
 	

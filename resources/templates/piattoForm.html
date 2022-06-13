@@ -3,6 +3,7 @@
  <head>
     <link href="/css/style-buffetForm.css" rel="stylesheet">
     <title>Form Piatto</title>
+    <meta charset="UTF-8">
 </head>
 <body>
     <h4>Piatto</h4>
@@ -15,8 +16,9 @@
             <div>Nome <br><input type="text" th:field="*{nome}"> </div>
             <span th:if="${#fields.hasErrors('nome')}" th:errors="*{nome}"></span>
             <div>Descrizione <br> <input class="descrizione" type="text" th:field="*{descrizione}"></div>
+            <span th:if="${#fields.hasErrors('descrizione')}" th:errors="*{descrizione}"><br></span> 
             <!-- <div>Buffet Id<input type="text" th:field="*{buffet}"></div> -->
-            <select th:field="*{buffet} " required hidden>
+            <select th:field="*{buffet} " required >
                 <th:block th:each="cat: ${buffet}">
                 <option hidden th:text="${cat.nome}" th:value="${cat.id}"></option>
             </th:block>

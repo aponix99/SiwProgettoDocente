@@ -16,8 +16,11 @@
         <div>Nome ingrediente <br> <input type="text" th:field="*{nome}"> </div>
         <span th:if="${#fields.hasErrors('nome')}" th:errors="*{nome}"></span>
         <div>Descrizione <br><input class="descrizione" type="text" th:field="*{descrizione}"></div>
+        <span th:if="${#fields.hasErrors('descrizione')}" th:errors="*{descrizione}"></span>
         <div>Origine <br><input type="text" th:field="*{origine}"></div>
-        <select th:field="*{piatto} " required hidden>
+        <span th:if="${#fields.hasErrors('origine')}" th:errors="*{origine}"></span>
+        
+        <select th:field="*{piatto} " required >
             <th:block th:each="cat: ${piatto}">
                 <option hidden th:text="${cat.nome}" th:value="${cat.id}"></option>
          </th:block> 

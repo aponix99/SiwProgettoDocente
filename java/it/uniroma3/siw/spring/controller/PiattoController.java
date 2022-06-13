@@ -37,6 +37,10 @@ public class PiattoController {
 			model.addAttribute("piatto",piattoService.findById(piatto.getId()));
 			return "piatto.html";
 		}
+		Long id=piatto.getBuffet().getId();
+		Buffet buffet=buffetService.findById(id);
+		model.addAttribute("buffet",buffet);
+		model.addAttribute("piatto",piatto);
 		return "piattoForm.html";
 
 	}

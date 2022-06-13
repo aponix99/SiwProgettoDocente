@@ -37,7 +37,7 @@ public class IngredienteService {
 
 	public boolean alreadyExists(Ingrediente o) {
 		// TODO Auto-generated .method stub
-		return ingredienteService.existsByNome(o.getNome());
+		return ingredienteService.existsByNomeAndDescrizione(o.getNome(),o.getDescrizione());
 	}
 
 	public void deleteById(Long id) {

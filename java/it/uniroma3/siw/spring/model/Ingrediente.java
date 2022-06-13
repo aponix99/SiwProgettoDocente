@@ -7,16 +7,17 @@ import javax.persistence.GenerationType;
 import javax.persistence.Id;
 import javax.persistence.ManyToOne;
 import javax.persistence.OneToMany;
+import javax.validation.constraints.NotBlank;
 @Entity
 public class Ingrediente {
 	@Id
 	@GeneratedValue(strategy = GenerationType.AUTO)
 	private Long id;
-	@Column
+	@NotBlank
 	String nome;
-	@Column
+	@NotBlank
 	String origine;
-	@Column 
+	@NotBlank
 	String descrizione;
 
 	@ManyToOne

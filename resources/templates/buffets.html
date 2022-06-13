@@ -13,6 +13,7 @@
       <td th:text="${chef}">chef id</td>
       <a href="buffet.html" th:href="@{'/buffet' + '/' + ${buffet.id}}"
       th:text="dettagli">Il mio buffet</a>
+      <!--<td><a th:href="@{'/toUpdateBuffet' + '/' + ${buffet.id}}" th:text="Update"></a> </td> -->
       <td><a th:href="@{'/toDeleteBuffet' + '/' + ${buffet.id}}" th:text="Elimina"></a> </td>
 		</li>
     </ul>

@@ -32,13 +32,19 @@ public class IngredienteController {
 
 	//aggiunge una Ingrediente 
 	@PostMapping("/ingrediente")
-	public String addIngrediente(@Valid @ModelAttribute ("Ingrediente") Ingrediente Ingrediente,BindingResult bindingResult,Model model) {
-		this.ingredienteValidator.validate(Ingrediente, bindingResult);
+	public String addIngrediente(@Valid @ModelAttribute ("ingrediente") Ingrediente ingrediente,BindingResult bindingResult,Model model) {
+		this.ingredienteValidator.validate(ingrediente, bindingResult);
 		if(!bindingResult.hasErrors()) {
-			ingredientiService.save(Ingrediente);
-			model.addAttribute("ingrediente",ingredientiService.findById(Ingrediente.getId()));
+			ingredientiService.save(ingrediente);
+			model.addAttribute("ingrediente",ingredientiService.findById(ingrediente.getId()));
 			return "ingrediente.html";
 		}
+		
+		//mi serve l'id del piatto
+		Long id=ingrediente.getPiatto().getId();
+		Piatto piatto=piattoService.findById(id);
+		model.addAttribute("piatto",piatto);
+		model.addAttribute("ingrediente", ingrediente);
 		return "ingredienteForm.html";
 
 	}
