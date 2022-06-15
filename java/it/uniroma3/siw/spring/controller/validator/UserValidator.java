@@ -20,25 +20,16 @@ public class UserValidator implements Validator {
         User user = (User) o;
         String nome = user.getNome().trim();
         String cognome = user.getCognome().trim();
-        String nazionalita=user.getNazionalita().trim();
+//
+//        if (nome.isEmpty())
+//            errors.rejectValue("nome", "required");
+        if (nome.length() < MIN_NAME_LENGTH || nome.length() > MAX_NAME_LENGTH)
+            errors.reject("size.user.nome");
 
-        if (nome.isEmpty())
-            errors.rejectValue("nome", "required");
-        else if (nome.length() < MIN_NAME_LENGTH || nome.length() > MAX_NAME_LENGTH)
-            errors.rejectValue("nome", "size");
-
-        if (cognome.isEmpty())
-            errors.rejectValue("cognome", "required");
+//        if (cognome.isEmpty())
+//            errors.rejectValue("cognome", "required");
         else if (cognome.length() < MIN_NAME_LENGTH || cognome.length() > MAX_NAME_LENGTH)
-            errors.rejectValue("cognome", "size");
-        
-        if (nazionalita.isEmpty())
-            errors.rejectValue("nazionalita", "required");
-        else if (nazionalita.length() < MIN_NAME_LENGTH || nazionalita.length() > MAX_NAME_LENGTH)
-            errors.rejectValue("nazionalita", "size");
-        
-        
-        
+        	errors.reject("size.user.cognome");
     }
 
     @Override

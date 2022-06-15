@@ -20,7 +20,7 @@
         <div>Origine <br><input type="text" th:field="*{origine}"></div>
         <span th:if="${#fields.hasErrors('origine')}" th:errors="*{origine}"></span>
         
-        <select th:field="*{piatto} " required >
+        <select th:field="*{piatto} " required hidden >
             <th:block th:each="cat: ${piatto}">
                 <option hidden th:text="${cat.nome}" th:value="${cat.id}"></option>
          </th:block> 

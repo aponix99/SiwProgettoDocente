@@ -1,7 +1,5 @@
 package it.uniroma3.siw.spring.controller;
 
-import javax.transaction.Transactional;
-
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.security.core.context.SecurityContextHolder;
 import org.springframework.security.core.userdetails.UserDetails;
@@ -10,7 +8,6 @@ import org.springframework.ui.Model;
 import org.springframework.validation.BindingResult;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.ModelAttribute;
-import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 
@@ -70,19 +67,20 @@ public class AuthenticationController {
     }
 	
     @RequestMapping(value = { "/register" }, method = RequestMethod.POST)
-    public String registerUser(@ModelAttribute("user") User user,@ModelAttribute("chef") Chef chef,
+    public String registerUser(@ModelAttribute("user") User user, Chef chef,
                  BindingResult userBindingResult,
                  @ModelAttribute("credentials") Credentials credentials,
                  BindingResult credentialsBindingResult,BindingResult chefBindingResult,
                  Model model) {
 
         // validate user and credentials fields
-        this.userValidator.validate(user, userBindingResult);
+    
         this.credentialsValidator.validate(credentials, credentialsBindingResult);
-        this.chefValidator.validate(chef, chefBindingResult);
+        this.userValidator.validate(user, userBindingResult);
+//        this.chefValidator.validate(chef, chefBindingResult);
 
         // if neither of them had invalid contents, store the User and the Credentials into the DB
-        if(!userBindingResult.hasErrors() && ! credentialsBindingResult.hasErrors() && !chefBindingResult.hasErrors()) {
+        if( !userBindingResult.hasErrors() && !credentialsBindingResult.hasErrors() )  {
             // set the user and store the credentials;
             // this also stores the User, thanks to Cascade.ALL policy
             credentials.setUser(user);

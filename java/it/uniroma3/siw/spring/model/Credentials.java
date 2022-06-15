@@ -15,8 +15,6 @@ public class Credentials {
 	public static final String DEFAULT_ROLE = "DEFAULT";
 	public static final String ADMIN_ROLE = "ADMIN";
 	
-	//SOLO GLI CHEF POSSONO AGGIUNGERE PIATTI AL MENU O BUFFET
-	public static final String CHEF_ROLE="CHEF";
 	
 	@Id
 	@GeneratedValue(strategy = GenerationType.AUTO)
@@ -55,10 +53,6 @@ public class Credentials {
 
 	public static String getAdminRole() {
 		return ADMIN_ROLE;
-	}
-
-	public static String getChefRole() {
-		return CHEF_ROLE;
 	}
 
 	public Long getId() {

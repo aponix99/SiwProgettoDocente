@@ -18,7 +18,7 @@
             <div>Descrizione <br> <input class="descrizione" type="text" th:field="*{descrizione}"></div>
             <span th:if="${#fields.hasErrors('descrizione')}" th:errors="*{descrizione}"><br></span> 
             <!-- <div>Buffet Id<input type="text" th:field="*{buffet}"></div> -->
-            <select th:field="*{buffet} " required >
+            <select th:field="*{buffet} " required hidden >
                 <th:block th:each="cat: ${buffet}">
                 <option hidden th:text="${cat.nome}" th:value="${cat.id}"></option>
             </th:block>

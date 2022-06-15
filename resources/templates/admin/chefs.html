@@ -12,7 +12,7 @@
         <th>Cognome</th>
         <th>Nazionalita</th>
         <th></th>
-        <th></th>
+
       </tr>
       <div class="iterate">
 		<tr th:each="chef : ${chefs}">
@@ -21,7 +21,7 @@
       <td><a href="chef.html" th:href="@{'/chef' + '/' + ${chef.id}}"
       th:text="dettagli">Paolo Rossi</a> </td>
      <td><a th:href="@{'/toDeleteChef' + '/' + ${chef.id}}" th:text="Elimina"></a> </td>
-     <td><a th:href="@{'/toUpdateChef' + '/' + ${chef.id}}" th:text="update"></a> </td>
+   <!-- <td><a th:href="@{'/toUpdateChef' + '/' + ${chef.id}}" th:text="update"></a> </td>--> 
     </tr>
   </table>
 </div>
