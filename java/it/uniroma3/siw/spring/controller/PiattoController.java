@@ -2,6 +2,7 @@ package it.uniroma3.siw.spring.controller;
 
 import java.util.List;
 
+import javax.transaction.Transactional;
 import javax.validation.Valid;
 
 import org.springframework.beans.factory.annotation.Autowired;
@@ -14,8 +15,11 @@ import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
 import it.uniroma3.siw.spring.controller.validator.PiattoValidator;
 import it.uniroma3.siw.spring.model.Buffet;
+import it.uniroma3.siw.spring.model.Chef;
+import it.uniroma3.siw.spring.model.Ingrediente;
 import it.uniroma3.siw.spring.model.Piatto;
 import it.uniroma3.siw.spring.service.BuffetService;
+import it.uniroma3.siw.spring.service.IngredienteService;
 import it.uniroma3.siw.spring.service.PiattoService;
 
 
@@ -25,6 +29,7 @@ public class PiattoController {
 	@Autowired PiattoService piattoService;
 	@Autowired PiattoValidator piattoValidator;
 	@Autowired BuffetService buffetService;
+	@Autowired IngredienteService ingredienteService;
 
 
 
@@ -45,15 +50,15 @@ public class PiattoController {
 
 	}
 
-//	@GetMapping("buffet/{id}/piattoForm")
-//	public String piattoForm(@PathVariable ("id") Long id,Model model) {
-//		Buffet buffet=buffetService.findById(id);
-//		model.addAttribute("buffets",buffet);
-//		model.addAttribute("piatto",new Piatto());
-//		return "piattoForm.html";
-//	}
+	//	@GetMapping("buffet/{id}/piattoForm")
+	//	public String piattoForm(@PathVariable ("id") Long id,Model model) {
+	//		Buffet buffet=buffetService.findById(id);
+	//		model.addAttribute("buffets",buffet);
+	//		model.addAttribute("piatto",new Piatto());
+	//		return "piattoForm.html";
+	//	}
 
-	
+
 	//richiede tutti i piatti (di tutti gli chef)
 	@GetMapping("/piatti")
 	public String getPiatti(Model model) {
@@ -61,7 +66,7 @@ public class PiattoController {
 		model.addAttribute("piatti", this.piattoService.findAll());
 		return "piatti.html";
 	}
-	
+
 	//richiede il piatto con id passato nel parametro
 	@GetMapping("/piatto/{id}")
 	public String getPiatto(@PathVariable("id") Long id, Model model) {
@@ -77,12 +82,39 @@ public class PiattoController {
 		model.addAttribute("piatti",piatti);
 		return "piatti.html";
 	}
-	
+
 	@GetMapping("/buffet/{id}/piattoForm")
 	public String getPiatto(Model model,@PathVariable ("id") Long id) {
 		model.addAttribute("buffet", buffetService.findById(id));
 		model.addAttribute("piatto",new Piatto());
 		return "piattoForm.html";
+	}
+
+	@GetMapping("/toDeletePiatto/{id}")
+	public String toDeleteBuffet(@PathVariable ("id") Long id,Model model) {
+		model.addAttribute("piatto",this.piattoService.findById(id));
+		return "confirmDeletePiatto.html";
+	}
+
+	@Transactional
+	@GetMapping("deletePiatto/{id}")
+	public String deleteBuffet(@PathVariable ("id") Long id,Model model) {
+		//		if(action.equals("Elimina")) {
+		//			this.chefService.deleteById(id);
+		//		}
+		Piatto piatto=piattoService.findById(id);
+		List<Ingrediente> ingredienti=ingredienteService.findByPiatto(piatto);
+		if(ingredienti!=null){
+			for(Ingrediente i:ingredienti) {
+				Long idIngredienteCorrente=i.getId();
+				ingredienteService.deleteById(idIngredienteCorrente);
+			}
+		}
+		Long idPiattoCorrente=piatto.getId();
+		piattoService.deleteById(idPiattoCorrente);
+		Buffet buffet=piatto.getBuffet();
+		model.addAttribute("piatti",piattoService.findByBuffet(buffet));
+		return "piatti.html";
 	}
 }
 

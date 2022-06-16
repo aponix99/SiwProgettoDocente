@@ -11,6 +11,7 @@
             <th>Nome</th>
             <th>Descrizione</th>
             <th></th>
+            <th></th>
         </tr>
         <div class="iterate">
 		<tr th:each="piatto : ${piatti}">
@@ -19,6 +20,8 @@
       <!--<td> <span th:text="${buffet}">chef id </span></td> -->
       <td><a href="piatto.html" th:href="@{'/piatto' + '/' + ${piatto.id}}"
       th:text="dettagli">Il mio piatto</a> </td>
+      <td><a href="piatto.html" th:href="@{'/toDeletePiatto' + '/' + ${piatto.id}}"
+        th:text="elimina">Il mio piatto</a> </td>
     </tr>
   </table>
 </div>

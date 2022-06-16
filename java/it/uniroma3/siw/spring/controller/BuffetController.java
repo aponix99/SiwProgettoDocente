@@ -13,9 +13,6 @@ import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
-import org.springframework.web.bind.annotation.PutMapping;
-import org.springframework.web.bind.annotation.RequestBody;
-
 import it.uniroma3.siw.spring.controller.validator.BuffetValidator;
 import it.uniroma3.siw.spring.model.Buffet;
 import it.uniroma3.siw.spring.model.Chef;
@@ -74,10 +71,9 @@ public class BuffetController {
 
 
 
-	//richiede tutte le chefs
+	//richiede tutte gli chef
 	@GetMapping("/buffets")
 	public String getBuffets(Model model) {
-		List<Buffet> buffets=buffetService.findAll();
 		model.addAttribute("buffets", this.buffetService.findAll());
 		return "buffets.html";
 	}
@@ -100,13 +96,18 @@ public class BuffetController {
 		return "buffets.html";
 	}
 
-	/*Funzione che rimanda a una pagina html di conferma per rimuovere una chef*/
+	/*Funzione che rimanda a una pagina html di conferma per rimuovere un buffet*/
 	@GetMapping("/toDeleteBuffet/{id}")
 	public String toDeleteBuffet(@PathVariable ("id") Long id,Model model) {
 		model.addAttribute("buffet",this.buffetService.findById(id));
 		return "confirmDeleteBuffet.html";
 	}
 
+	
+	/*
+	 * Funzione che elimina un buffet (e tutti i suoi piatti ed ingredienti) 
+	 * e ritorna tutti i buffet dello chef
+	 */
 	@Transactional
 	@GetMapping("deleteBuffet/{id}")
 	public String deleteBuffet(@PathVariable ("id") Long id,Model model) {
@@ -115,6 +116,7 @@ public class BuffetController {
 		//		}
 		Buffet buffet=buffetService.findById(id);
 		List <Piatto> piatti=piattoService.findByBuffet(buffet);
+		//se non ci sono piatti(i.e non ci sono ingredienti) posso direttamente eliminare il buffet
 		if(piatti!=null) {
 			for(Piatto p:piatti) {
 				List<Ingrediente> ingredienti=ingredienteService.findByPiatto(p);

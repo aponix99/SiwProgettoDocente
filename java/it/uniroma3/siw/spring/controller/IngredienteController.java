@@ -83,7 +83,7 @@ public class IngredienteController {
 	/*Funzione che rimanda a una pagina html di conferma per rimuovere una Ingrediente*/
 	@GetMapping("/toDeleteIngrediente/{id}")
 	public String toDeleteIngrediente(@PathVariable ("id") Long id,Model model) {
-		model.addAttribute("Ingrediente",this.ingredientiService.findById(id));
+		model.addAttribute("ingrediente",this.ingredientiService.findById(id));
 		return "confirmDeleteIngrediente.html";
 	}
 	
@@ -93,11 +93,15 @@ public class IngredienteController {
 //		if(action.equals("Elimina")) {
 //			this.ingredientiervice.deleteById(id);
 //		}
+		Ingrediente ingrediente=ingredientiService.findById(id);
+		Piatto piatto=ingrediente.getPiatto();
 		ingredientiService.deleteById(id);
-		model.addAttribute("ingredienti",ingredientiService.findAll());
+		model.addAttribute("ingredienti",ingredientiService.findByPiatto(piatto));
 		return "ingredienti.html";
 	}
 	
+	
+	//Elimina un ingrediente associato a un piatto e ritorna tutti i gli ingredienti associato a quel piatto
 	@GetMapping("/piatto/{id}/ingredientiDelPiatto")
 	public String getIngredientiDelPiatto(@PathVariable("id") Long id,Model model) {
 		Piatto piatto=piattoService.findById(id);

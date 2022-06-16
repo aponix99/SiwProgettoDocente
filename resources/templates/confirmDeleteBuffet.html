@@ -8,11 +8,14 @@
 <body>
     <div>
         <h4>Vuoi eliminare questo buffet?</h4>
-        <div>
-            <span th:text="${buffet.nome}">Paolo</span>
-            <span th:text="${buffet.descrizione}">Rossi</span>
+        <br>
+        <h4>Eliminando questo buffet eliminerai anche i piatti associati a questo buffet e tutti i suoi ingredienti!</h4>
+        <h4>L'operazione sarà irreversibile.</h4>
+        <div class="details">
+            Nome Buffet: <span th:text="${buffet.nome}">Paolo</span> <br>
+            Descrizione Buffet:  <span th:text="${buffet.descrizione}">Rossi</span>
         </div>
-        <a href="chefs.html" th:href="@{'/deleteBuffet' + '/' + ${buffet.id}}">Elimina</a>
+        <a href="chefs.html" th:href="@{'/deleteBuffet' + '/' + ${buffet.id}}">Conferma</a>
     </div>
     <footer><a href="/">Home</a></footer>
 </body>
